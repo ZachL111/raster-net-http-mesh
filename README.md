@@ -1,69 +1,40 @@
 # raster-net-http-mesh
 
-`raster-net-http-mesh` treats networking as a local verification problem. The TypeScript implementation is intentionally narrow, but the fixtures and notes make the behavior explicit.
+`raster-net-http-mesh` explores networking with a small TypeScript codebase and local fixtures. The technical goal is to design a TypeScript verification harness for http systems, covering security rule linting, safe and unsafe fixtures, and failure-oriented tests.
 
-## Raster Net HTTP Mesh Checkpoints
+## Reason For The Project
 
-Treat the compact fixture as the contract and the extended examples as a scratchpad. The code should stay boring enough that a change in behavior is obvious from the test output.
+This is intentionally local and self-contained so it can be inspected without credentials, services, or seeded history.
 
-## Useful Pieces
+## Raster Net HTTP Mesh Review Notes
 
-- Includes extended examples for retry behavior, including `surge` and `degraded`.
-- Documents policy decisions tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
-- Stores project constants and verification metadata in `metadata/project.json`.
-- Adds a repository audit script that checks structure before running the language verifier.
+For a quick review, compare `packet span` with `retry pressure` before reading the middle cases.
 
-## What This Is For
+## What It Does
 
-The goal is to capture the core behavior in code and make the surrounding assumptions obvious. A reader should be able to run the verifier, open the fixtures, and understand why each decision was made.
+- `fixtures/domain_review.csv` adds cases for packet span and retry pressure.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/raster-net-http-walkthrough.md` walks through the case spread.
+- The TypeScript code includes a review path for `packet span` and `retry pressure`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Project Layout
+## How It Is Put Together
 
-- `src`: primary implementation
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
-- `package.json`: Node package scripts
+The fixture data drives the tests. The code stays thin, while `metadata/domain-review.json` and `config/review-profile.json` explain what each case is meant to protect.
 
-## Architecture Notes
+The TypeScript code keeps the review rule close to the tests.
 
-The design is intentionally direct: parse or construct a signal, score it, classify it, and verify the expected branch. This makes the repository useful for studying networking behavior without needing a service or database unless the language project itself is SQL. The TypeScript project keeps types close to the model and compiles before running its checks.
-
-## Local Workflow
+## Run It
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Check It
 
-## Case Study
+The check exercises the source code and the review fixture. `stale` is the high score at 252; `stress` is the low score at 142.
 
-The extended cases are not random smoke tests. `degraded` keeps pressure on the review path, while `surge` shows the model when capacity and weight are strong enough to clear the threshold.
+## Boundaries
 
-## Quality Gate
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
-
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Scope
-
-This code is local-first. It makes no claim about deployed usage and avoids credentials, hosted state, and environment-specific setup.
-
-## Expansion Ideas
-
-- Add a loader for `examples/extended_cases.csv` and promote selected cases into the language test suite.
-- Add a short report command that prints the score breakdown for a single scenario.
-- Add malformed input fixtures so the failure path is as visible as the happy path.
-- Add one more networking fixture that focuses on a malformed or borderline input.
-
-## Tooling
-
-The only required setup is the local TypeScript toolchain. After cloning, stay in the repo root so fixture paths resolve correctly.
+This remains a local project with deterministic fixtures. It does not depend on credentials, hosted services, or live data. Future work should add richer malformed inputs before widening the public API.

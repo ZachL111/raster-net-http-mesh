@@ -1,0 +1,73 @@
+{
+  "repo": "raster-net-http-mesh",
+  "language": "TypeScript",
+  "category": "Networking",
+  "goal": "Design a TypeScript verification harness for http systems, covering security rule linting, safe and unsafe fixtures, and failure-oriented tests.",
+  "review_model": {
+    "terms": [
+      "packet span",
+      "retry pressure",
+      "route drift",
+      "socket risk"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "packet span",
+      "signal": 69,
+      "slack": 53,
+      "drag": 23,
+      "confidence": 64,
+      "score": 186,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "retry pressure",
+      "signal": 46,
+      "slack": 54,
+      "drag": 22,
+      "confidence": 62,
+      "score": 142,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "route drift",
+      "signal": 72,
+      "slack": 39,
+      "drag": 12,
+      "confidence": 74,
+      "score": 221,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "socket risk",
+      "signal": 77,
+      "slack": 21,
+      "drag": 29,
+      "confidence": 64,
+      "score": 152,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "packet span",
+      "signal": 86,
+      "slack": 41,
+      "drag": 16,
+      "confidence": 87,
+      "score": 252,
+      "lane": "ship"
+    }
+  ]
+}
