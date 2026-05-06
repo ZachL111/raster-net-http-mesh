@@ -1,0 +1,17 @@
+{
+  "repo": "raster-net-http-mesh",
+  "thresholds": {
+    "signal": 4,
+    "slack": 2,
+    "confidence": 2,
+    "drag": 4,
+    "ship": 190,
+    "watch": 127
+  },
+  "terms": [
+    "packet span",
+    "retry pressure",
+    "route drift",
+    "socket risk"
+  ]
+}
